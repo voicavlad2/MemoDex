@@ -1,4 +1,4 @@
-# MemoDex – aplicație web pentru gestionarea notițelor de curs/seminar
+# MemoDex – aplicație web pentru gestionarea notițelor
 
 ## 📌 Descriere
 **MemoDex** este o aplicație web tip **Single Page Application (SPA)** care permite studenților să își organizeze notițele de curs și seminar.  
