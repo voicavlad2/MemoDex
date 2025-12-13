@@ -49,7 +49,7 @@ Oferirea unei soluții simple și eficiente pentru:
 
 - **Frontend:** React (SPA)
 - **Backend:** Node.js (Express/Nest)
-- **Bază de date:** MongoDB
+- **Bază de date:** PostgreSQL
 - **API:** REST
 - **Autentificare:** OAuth2 / OpenID Connect
 
