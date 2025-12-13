@@ -4,7 +4,9 @@
   "description": "**MemoDex** este o aplicație web tip **Single Page Application (SPA)** care permite studenților să își organizeze notițele de curs și seminar.  \r Platforma oferă un editor Markdown, suport pentru atașamente, organizare pe materii și tag-uri, funcții de partajare și gestionare a grupurilor de studiu.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,9 @@
   },
   "homepage": "https://github.com/voicavlad2/MemoDex#readme",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "nodemon": "^3.1.11",
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7"

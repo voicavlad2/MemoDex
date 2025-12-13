@@ -1,5 +1,4 @@
-import { DataTypes } from "sequelize";
-
+const { DataTypes } = require("sequelize");
 /*
 Tabela Tags
 -etichete pt organizare notite
@@ -12,7 +11,7 @@ Relatii:
 -Tag poate fi legat la Notes prin NoteTag
 */
 
-export default (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("Tag", {
         name: { type: DataTypes.STRING, allowNull: false, unique: true },
     });

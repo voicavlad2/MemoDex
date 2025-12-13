@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+const { DataTypes } = require("sequelize");
 
 // Tabela Users
 // -stocheaza studentii
@@ -14,7 +14,7 @@ import { DataTypes } from "sequelize";
 // -User poate avea acces la mai multe SharedNotes
 
 
-export default (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("User", {
         email: { type: DataTypes.STRING, allowNull: false, unique: true },
         name: { type: DataTypes.STRING, allowNull: false },

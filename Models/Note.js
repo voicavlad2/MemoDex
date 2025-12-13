@@ -1,5 +1,4 @@
-import { DataTypes } from "sequelize";
-import User from "./User";
+const { DataTypes } = require("sequelize");
 
 /*
 Tabela Notes
@@ -20,7 +19,7 @@ Relatii:
 -Note poate fi partajata cu Users sau Groups
 */
 
-export default (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("Note", {
         title: { type: DataTypes.STRING, allowNull: false },
         content_markdown: { type: DataTypes.TEXT, allowNull: true },

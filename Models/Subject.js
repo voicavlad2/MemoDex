@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+const { DataTypes } = require("sequelize");
 /*
 Tabela Subject
 -materii pentru notite
@@ -11,7 +11,7 @@ Relatii:
 -Subject poate avea mai multe Notes
 -Fiecare Note apartine unui Subject
 */
-export default (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("Subject", {
         name: {
             type: DataTypes.STRING,

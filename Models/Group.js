@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+const { DataTypes } = require("sequelize");
 
 /*
 Tabela Groups
@@ -14,7 +14,7 @@ Relatii:
 -Group poate avea mai multe SharedNotes
 */
 
-export default (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("Group", {
         name: { type: DataTypes.STRING, allowNull: false },
         description: { type: DataTypes.TEXT, allowNull: true },

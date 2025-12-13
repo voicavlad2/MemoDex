@@ -12,7 +12,6 @@ Relatii:
 -Tag poate fi asociat cu mai multe Note
 */
 
-
-export const NoteTagModel = (sequelize) => {
+module.exports = (sequelize) => {
     return sequelize.define("NoteTag", {});
 };
