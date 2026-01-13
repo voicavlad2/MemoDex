@@ -280,6 +280,21 @@ app.post("/share-note/user/:noteId", authenticateToken, async (req, res) => {
   res.json({ message: "Note shared successfully" });
 });
 
+//SEARCH NOTE
+
+app.get("/search-notes", authenticateToken, async (req, res) => {
+  const { q } = req.query;
+  const { user } = req.user;
+
+  const notes = await Note.find({
+    content: { $regex: q, $options: "i" },
+    userId: user._id
+  });
+
+  res.json({ notes });
+});
+
+
 // UPLOAD ATASAMENT
 
 const upload = require("./middlewares/upload");
