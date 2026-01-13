@@ -83,6 +83,28 @@ app.post("/get-user", authenticateToken ,async(req,res) => {
     
 });
 
+//GET ALL USERS
+
+app.get("/get-all-users", authenticateToken, async (req, res) => {
+  try {
+    const { user } = req.user;
+
+    const users = await User.find(
+      { _id: { $ne: user._id } }, // exclude user-ul curent
+      { password: 0 }             // exclude parola
+    ).select("_id fullName email");
+
+    res.status(200).json({
+      error: false,
+      users
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: "Internal Server Error"
+    });
+  }
+});
 
 
 
@@ -208,6 +230,29 @@ app.post("/get-all-notes", authenticateToken, async(req,res) => {
     }
 })
 
+//GET NOTE
+
+app.get("/notes/:noteId", authenticateToken, async (req, res) => {
+  const { noteId } = req.params;
+  const { user } = req.user;
+
+  const note = await Note.findOne({
+    _id: noteId,
+    $or: [
+      { userId: user._id },
+      { "sharedWithUsers.userId": user._id }
+    ]
+  });
+
+  if (!note) {
+    return res.status(404).json({ message: "Note not found" });
+  }
+
+  res.json({ note });
+});
+
+
+
 //SHARE NOTE
 
 app.post("/share-note/user/:noteId", authenticateToken, async (req, res) => {
@@ -315,6 +360,31 @@ app.post("/delete-note/:noteId", authenticateToken, async(req,res) => {
     }
 })
 
+//DELETE ATASAMENT
+
+
+app.delete(
+  "/notes/:noteId/attachment/:attachmentId",
+  authenticateToken,
+  async (req, res) => {
+    const { noteId, attachmentId } = req.params;
+    const { user } = req.user;
+
+    const note = await Note.findOne({ _id: noteId, userId: user._id });
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    note.attachments = note.attachments.filter(
+      a => a._id.toString() !== attachmentId
+    );
+
+    await note.save();
+    res.json({ message: "Attachment removed" });
+  }
+);
+
+
 
 //UPDATE isPinned
 
@@ -392,6 +462,37 @@ app.post("/groups/:groupId/invite", authenticateToken, async (req, res) => {
 
   res.json({ message: "User added to group" });
 });
+
+
+//GET GROUP 
+
+app.get("/my-groups", authenticateToken, async (req, res) => {
+  const { user } = req.user;
+
+  const groups = await StudyGroup.find({
+    "members.userId": user._id
+  }).select("_id name description");
+
+  res.json({ groups });
+});
+
+
+//LEAVE GROUP
+
+app.post("/groups/:groupId/leave", authenticateToken, async (req, res) => {
+  const { groupId } = req.params;
+  const { user } = req.user;
+
+  const group = await StudyGroup.findById(groupId);
+  group.members = group.members.filter(
+    m => m.userId.toString() !== user._id.toString()
+  );
+
+  await group.save();
+  res.json({ message: "Left group" });
+});
+
+
 
 //PARTAJARE NOTE CU GRUP
 
