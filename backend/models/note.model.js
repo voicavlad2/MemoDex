@@ -4,14 +4,11 @@ const Schema = mongoose.Schema;
 const noteSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
-
   tags: { type: [String], default: [] },
   isPinned: { type: Boolean, default: false },
-
-  // 👤 USER ID ca STRING (așa cum vrei tu)
   userId: { type: String, required: true },
 
-  // 📎 ATAȘAMENTE
+  // ATAȘAMENTE
   attachments: {
     type: [
       {
@@ -24,7 +21,7 @@ const noteSchema = new Schema({
     default: []
   },
 
-  // 🤝 SHARE CU USERI
+  // SHARE CU USERI
   sharedWithUsers: {
     type: [
       {
@@ -35,7 +32,7 @@ const noteSchema = new Schema({
     default: []
   },
 
-  // 👥 SHARE CU GRUPURI
+  // SHARE CU GRUPURI
   sharedWithGroups: {
     type: [
       {
@@ -45,7 +42,7 @@ const noteSchema = new Schema({
     default: []
   },
 
-  // 🌐 SURSE EXTERNE
+  // SURSE EXTERNE
   externalSources: {
     type: [
       {
