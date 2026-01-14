@@ -8,7 +8,6 @@ import ViewNote from "./ViewNote";
 import Toast from "../../components/ToastMessage/Toast";
 import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import AddNotesImg from "../../assets/images/add-notes.svg";
 
 const Home = () => {
     const [allNotes, setAllNotes] = useState([]);
